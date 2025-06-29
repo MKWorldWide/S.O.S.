@@ -394,4 +394,78 @@ export const dynamicLimiter = rateLimit({
       message: 'Rate limit exceeded for your user role.',
     });
   },
-}); 
+});
+
+export const createAuthRateLimiter = rateLimit({
+  windowMs: config.security.rateLimitWindowMs,
+  max: 5, // 5 requests per window
+  message: {
+    success: false,
+    message: 'Too many authentication attempts, please try again later'
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req: Request) => {
+    return req.ip || req.connection.remoteAddress || 'unknown';
+  },
+  skip: (req: Request) => {
+    // Skip rate limiting for whitelisted IPs
+    const clientIP = req.ip || req.connection.remoteAddress;
+    if (clientIP && whitelistedIPs.includes(clientIP)) {
+      return true;
+    }
+    return false;
+  }
+});
+
+export const createApiRateLimiter = rateLimit({
+  windowMs: config.security.rateLimitWindowMs,
+  max: config.security.rateLimitMaxRequests,
+  message: {
+    success: false,
+    message: 'Too many requests, please try again later'
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req: Request) => {
+    return req.ip || req.connection.remoteAddress || 'unknown';
+  },
+  skip: (req: Request) => {
+    // Skip rate limiting for whitelisted IPs
+    const clientIP = req.ip || req.connection.remoteAddress;
+    if (clientIP && whitelistedIPs.includes(clientIP)) {
+      return true;
+    }
+    return false;
+  }
+});
+
+export const createStrictRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requests per 15 minutes
+  message: {
+    success: false,
+    message: 'Rate limit exceeded, please try again later'
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req: Request) => {
+    return req.ip || req.connection.remoteAddress || 'unknown';
+  },
+  skip: (req: Request) => {
+    // Skip rate limiting for whitelisted IPs
+    const clientIP = req.ip || req.connection.remoteAddress;
+    if (clientIP && whitelistedIPs.includes(clientIP)) {
+      return true;
+    }
+    return false;
+  }
+});
+
+export const isWhitelistedIP = (req: Request): boolean => {
+  const clientIP = req.ip || req.connection.remoteAddress;
+  if (clientIP && whitelistedIPs.includes(clientIP)) {
+    return true;
+  }
+  return false;
+}; 
