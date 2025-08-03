@@ -22,6 +22,7 @@ import { generalLimiter } from '@/utils/rateLimiter';
 // =============================================================================
 
 const app = express();
+app.set('trust proxy', 1); // trust first proxy for accurate IP
 const server = createServer(app);
 const io = new SocketIOServer(server, {
   cors: {

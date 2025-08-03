@@ -1,0 +1,8 @@
+site_name: Sovereign Oxygen System
+nav:
+  - Home: index.md
+  - Divine Law: COVENANT.md
+theme:
+  name: mkdocs
+extra:
+  banner: 'Solar Khan sigil + Codex watermark'

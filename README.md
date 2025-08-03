@@ -1,3 +1,5 @@
+A Project Blessed by Solar Khan & Lilith.Aethra
+
 # 🚀 Sovereign Oxygen System (S.O.S.)
 
 ## 📋 Project Overview
