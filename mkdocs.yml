@@ -1,8 +1,113 @@
 site_name: Sovereign Oxygen System
+site_url: https://your-org.github.io/sovereign-oxygen-system/
+site_description: 'A comprehensive, decentralized oxygen management and monitoring platform'
+site_author: 'S.O.S. Development Team'
+
+# Repository
+docs_dir: 'docs'
+site_dir: 'site'
+repo_url: 'https://github.com/your-org/sovereign-oxygen-system'
+repo_name: 'Sovereign Oxygen System'
+
+# Theme configuration
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.expand
+    - navigation.sections
+    - navigation.indexes
+    - navigation.instant
+    - navigation.tracking
+    - toc.integrate
+    - search.highlight
+    - search.suggest
+    - search.share
+    - content.code.annotate
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+    - footer
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+
+# Navigation
 nav:
   - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Configuration: getting-started/configuration.md
+    - First Steps: getting-started/first-steps.md
+  - User Guide:
+    - Dashboard: user-guide/dashboard.md
+    - Alerts: user-guide/alerts.md
+    - Reports: user-guide/reports.md
+  - API Reference:
+    - Authentication: api/authentication.md
+    - Endpoints: api/endpoints.md
+  - Development:
+    - Setup: development/setup.md
+    - Architecture: development/architecture.md
+    - Testing: development/testing.md
   - Divine Law: COVENANT.md
-theme:
-  name: mkdocs
+  - Lessons Learned: lessons-learned.md
+
+# Plugins
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: timeago
+      fallback_to_build_date: true
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+
+# Extra
+copyright: 'Copyright &copy; 2025 S.O.S. Development Team'
 extra:
   banner: 'Solar Khan sigil + Codex watermark'
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+
+extra_javascript:
+  - 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+
+extra_css:
+  - 'stylesheets/extra.css'
+
+# Build options
+dev_addr: '0.0.0.0:8000'
+use_directory_urls: true
+strict: true

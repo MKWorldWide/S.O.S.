@@ -1,0 +1,31 @@
+# Configuration for actionlint
+# https://github.com/rhysd/actionlint
+
+# Enable shellcheck for all run commands
+shellcheck: error
+
+# Enable pyflakes for Python scripts
+pyflakes: error
+
+# Enable additional checks for GitHub Actions
+self-hosted-runner:
+  labels: ["ubuntu-latest"]
+
+# Ignore specific checks
+ignore:
+  - "sc2155"  # Declare and assign separately to avoid masking return values
+  - "SC2086"  # Double quote to prevent globbing and word splitting
+  - "SC1091"  # Not following: .env: openFile: No such file or directory
+  - "SC1090"  # Can't follow non-constant source. Use a directive to specify location
+
+# Custom severity levels
+severity:
+  # Make these warnings instead of errors
+  warning:
+    - "labeler-missing"
+    - "runs-on-duplicate-values"
+
+  # Make these info instead of warnings
+  info:
+    - "job-name-duplicate"
+    - "runner-label-unknown"
